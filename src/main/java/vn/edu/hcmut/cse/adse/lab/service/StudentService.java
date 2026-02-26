@@ -24,4 +24,12 @@ public class StudentService {
     public List<Student> searchByName(String name) {
         return repository.findByNameContainingIgnoreCase(name);
     }
+
+    public void saveStudent(Student student) {
+        repository.save(student);
+    }
+
+    public void deleteStudent(Integer id) {
+        repository.deleteById(id);
+    }
 }
