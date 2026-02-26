@@ -26,4 +26,8 @@ public class StudentController {
     public Student getStudentById(@PathVariable Integer id) {
         return service.getById(id);
     }
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/students";
+    }
 }
