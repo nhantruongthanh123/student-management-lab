@@ -2,73 +2,89 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Chi tiết sinh viên</title>
+    <title>Chi Tiết Sinh Viên</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
     <style>
-        body { background-color: #f8f9fa; }
-        .detail-container { max-width: 600px; margin-top: 50px; }
+        /* Đồng bộ màu nền xám nhạt sang trọng với trang danh sách */
+        body {
+            background-color: #f4f7f6;
+        }
+        .detail-container {
+            max-width: 650px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container detail-container">
-    <div class="card shadow">
-        <div class="card-header bg-primary text-white">
-            <h3 class="card-title mb-0">Thông tin chi tiết sinh viên</h3>
-        </div>
+    <div class="card border-0 shadow-sm rounded-4">
 
-        <div class="card-body">
-            <div th:if="${student != null}">
-                <table class="table table-borderless">
+        <div class="card-body p-5">
+            <div class="text-center mb-5">
+                <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle mb-3" style="width: 80px; height: 80px;">
+                    <i class="bi bi-person-badge fs-1"></i>
+                </div>
+                <h2 class="fw-bold text-dark">Hồ Sơ Sinh Viên</h2>
+                <p class="text-muted">Thông tin chi tiết của học viên</p>
+            </div>
+
+            <div th:if="${student != null}" class="bg-light p-4 rounded-4 mb-4">
+                <table class="table table-borderless mb-0 fs-6">
+                    <tbody>
                     <tr>
-                        <th style="width: 30%">Mã số (ID):</th>
-                        <td th:text="${student.id}" class="fw-bold"></td>
+                        <th class="text-secondary w-50 pb-3"><i class="bi bi-hash me-2"></i>Mã số (ID):</th>
+                        <td class="fw-bold text-dark pb-3 fs-5" th:text="${student.id}"></td>
                     </tr>
                     <tr>
-                        <th>Họ tên:</th>
-                        <td th:text="${student.name}"></td>
+                        <th class="text-secondary pb-3"><i class="bi bi-person me-2"></i>Họ và Tên:</th>
+                        <td class="fw-bold text-dark pb-3" th:text="${student.name}"></td>
                     </tr>
                     <tr>
-                        <th>Email:</th>
-                        <td>
-                            <a th:href="'mailto:' + ${student.email}" th:text="${student.email}"></a>
+                        <th class="text-secondary pb-3"><i class="bi bi-envelope me-2"></i>Email liên hệ:</th>
+                        <td class="pb-3">
+                            <a th:href="'mailto:' + ${student.email}" class="text-decoration-none fw-medium" th:text="${student.email}"></a>
                         </td>
                     </tr>
                     <tr>
-                        <th>Tuổi:</th>
-                        <td>
-                            <span th:text="${student.age}"
-                                  th:class="${student.age < 18} ? 'badge bg-danger' : 'badge bg-success'">
-                            </span>
+                        <th class="text-secondary align-middle"><i class="bi bi-calendar-event me-2"></i>Độ tuổi:</th>
+                        <td class="align-middle">
+                                <span th:text="${student.age}"
+                                      th:class="${student.age < 18} ? 'badge bg-danger rounded-pill px-3 py-2' : 'badge bg-success rounded-pill px-3 py-2'">
+                                </span>
                         </td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
 
-            <div th:unless="${student != null}" class="alert alert-warning">
-                Không tìm thấy thông tin sinh viên này!
+            <div th:unless="${student != null}" class="alert alert-warning rounded-4 text-center p-4 shadow-sm mb-4">
+                <i class="bi bi-exclamation-triangle fs-3 d-block mb-2 text-warning"></i>
+                <span class="fw-medium">Không tìm thấy thông tin sinh viên này!</span>
             </div>
-        </div>
 
-        <div class="card-footer d-flex justify-content-between">
-            <a th:href="@{/students}" class="btn btn-secondary">
-                <i class="bi bi-arrow-left"></i> Quay lại danh sách
-            </a>
-            <div>
-                <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-warning" th:if="${student != null}">
-                    Chỉnh sửa
+            <div class="d-flex justify-content-between align-items-center mt-2 border-top pt-4">
+                <a th:href="@{/students}" class="btn btn-light border rounded-pill px-4 text-secondary fw-medium">
+                    <i class="bi bi-arrow-left me-1"></i> Quay lại
                 </a>
-                <a class="btn btn-danger"
-                        th:href="@{/students/delete/{id}(id=${student.id})}"
-                        onclick="return confirm('Bạn có chắc chắn muốn xóa sinh viên này?')"
-                >
-                    <i class="bi bi-trash"></i>
-                        Xóa </a>
+
+                <div th:if="${student != null}">
+                    <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-warning rounded-pill px-4 fw-medium text-dark shadow-sm me-2">
+                        <i class="bi bi-pencil-square me-1"></i> Chỉnh sửa
+                    </a>
+                    <a th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-danger rounded-pill px-4 fw-medium shadow-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa sinh viên này?')">
+                        <i class="bi bi-trash3 me-1"></i> Xóa
+                    </a>
+                </div>
             </div>
 
         </div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
