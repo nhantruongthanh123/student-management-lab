@@ -4,7 +4,7 @@
 * Trương Thanh Nhân - MSSV: 2312453
 
 ## Public URL của Web Service (Lab 5)
-* ...
+* https://student-management-lab.onrender.com/students
 
 ## Hướng dẫn cách chạy dự án (Local)
 1. Đảm bảo máy tính đã cài đặt Java 17 (hoặc 21) và cấu hình đúng `JAVA_HOME`.
@@ -38,4 +38,34 @@
 4. Cấu hình Hibernate
 * Mỗi lần tắt ứng dụng và chạy lại, dữ liệu cũ trong Database bị mất sạch là do dòng cấu hình `spring.jpa.hibernate.ddl-auto=create` nằm trong file `application.properties
 * Giá trị `create` ra lệnh cho Hibernate rằng mỗi khi khởi động server, nó phải tự động xóa bỏ (DROP) các bảng cũ và khởi tạo lại (CREATE) các bảng mới tinh dựa trên cấu trúc mã nguồn. Thiết lập này giúp môi trường dev luôn sạch sẽ, nhưng khi triển khai thực tế (production), bắt buộc phải đổi cấu hình này thành `update` hoặc `none` để bảo vệ dữ liệu
-   
+
+
+## Screenshot cho các module trong Lab 4
+
+### Danh sách các module cần chụp ảnh:
+
+#### 1. Trang Danh sách sinh viên
+- **URL**: `https://student-management-lab.onrender.com/students`
+- **Mô tả**: Hiển thị tất cả sinh viên với các trường: ID, Họ và Tên, Email, Tuổi
+- **Chức năng**: Có nút "Thêm sinh viên mới", nút "Xem chi tiết" cho mỗi sinh viên
+![img.png](src/main/resources/static/list_view.png)
+
+#### 2. Trang Chi tiết sinh viên
+- **URL**: `https://student-management-lab.onrender.com/students/{id}` (ví dụ: `/students/1`)
+- **Mô tả**: Hiển thị thông tin chi tiết của một sinh viên
+- **Chức năng**: Xem thông tin, có các nút "Sửa" và "Xóa"
+![img.png](src/main/resources/static/detail_view.png)
+
+#### 3. Trang Thêm sinh viên mới
+- **URL**: `https://student-management-lab.onrender.com/students/new`
+- **Mô tả**: Form nhập thông tin sinh viên mới
+- **Chức năng**: Nhập Name, Email, Age và lưu vào database
+![img.png](src/main/resources/static/add_student.png)
+
+
+#### 4. Trang Chỉnh sửa sinh viên
+- **URL**: `http://localhost:8080/students/edit/{id}` (ví dụ: `/students/edit/1`)
+- **Mô tả**: Form chỉnh sửa thông tin sinh viên
+- **Chức năng**: Cập nhật thông tin sinh viên đã có
+![img.png](src/main/resources/static/edit_student.png)
+
